@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../styles/header.css";
 import { FaBuilding, FaRegBuilding, FaUserFriends } from "react-icons/fa";
 import { CiGlobe } from "react-icons/ci";
 import { HiOutlineUsers, HiUsers } from "react-icons/hi2";
@@ -6,11 +9,9 @@ import { LiaProjectDiagramSolid, LiaCogsSolid } from "react-icons/lia";
 import { MdOutlineEdit, MdEdit } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import { FaGlobe } from "react-icons/fa";
-import StepItem from "./header/stepItem";
-import StepDivider from "./header/stepDivider";
-import "../../styles/header.css";
 
 function Header() {
+  const location = useLocation(); // 🚀 Sayfa değiştiğinde URL'yi yakala
   const [activeStep, setActiveStep] = useState(4);
 
   const steps = [
@@ -24,13 +25,45 @@ function Header() {
     { id: 8, icons: { filled: LuCalendarDays, outlined: LuCalendarDays }, label: "Schedule", path: "/schedule" },
   ];
 
+  // 🌟 Sayfa değiştiğinde activeStep'i güncelle
+  useEffect(() => {
+    const currentStep = steps.find((step) => location.pathname.startsWith(step.path));
+    if (currentStep) {
+      setActiveStep(currentStep.id);
+    }
+  }, [location.pathname]); // 🔄 URL değiştiğinde çalıştır
+
   return (
     <div className="header-container">
       <div className="steps-wrapper">
         {steps.map((step, index) => (
           <React.Fragment key={step.id}>
-            <StepItem step={step} activeStep={activeStep} setActiveStep={setActiveStep} />
-            {index < steps.length - 1 && <StepDivider />}
+            <Link
+              to={step.path}
+              style={{ textDecoration: "none" }}
+              className="step-link"
+            >
+              <div
+                className={`step-box ${activeStep === step.id ? "active" : "inactive"} ${step.id <= activeStep ? "completed" : ""}`}
+              >
+                <div className={`step-icon-container ${activeStep === step.id ? "active" : "inactive"}`}>
+                  {React.createElement(activeStep === step.id ? step.icons.filled : step.icons.outlined, {
+                    size: 24,
+                    color: activeStep === step.id ? "white" : "#7F56D9",
+                  })}
+                </div>
+                {activeStep === step.id && (
+                  <div className="step-details">
+                    <span>Step {step.id}/8</span>
+                    <span>{step.label}</span>
+                  </div>
+                )}
+              </div>
+            </Link>
+
+            {index < steps.length - 1 && (
+              <hr className="step-divider" style={{ display: "block", visibility: "visible", backgroundColor: "#E4E7EC" }} />
+            )}
           </React.Fragment>
         ))}
       </div>

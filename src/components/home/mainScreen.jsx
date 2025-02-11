@@ -23,9 +23,9 @@ export default function MainScreen() {
           padding: "20px",
         }}
       >
-        <h2 style={{ fontSize: "30px", fontWeight: "bold" }}>Ana Ekran</h2>
+        <h2 style={{ fontSize: "30px", fontWeight: "bold" }}>Personel Ekle</h2>
         <p style={{ fontSize: "18px", color: "#6c757d" }}>
-          Personel işlemleri için aşağıdan devam edebilirsiniz.
+        Firmanızda çalışan personellerinizi ekleyebilir, oluşturduğunuz departmanlara atayabilirsiniz.
         </p>
         <button
           className="btn"

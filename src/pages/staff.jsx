@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import PersonelList from "../components/personelList";
-import NewPersonelForm from "../components/newPersonelForm";
-import MainScreen from "../components/mainScreen";
+import PersonelList from "./staff/personelList";
+import NewPersonelForm from "./staff/form/mainForm";
+import MainScreen from "../components/home/mainScreen";
 import '../styles/home.css';
 
 export default function Staff() {

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../styles/home.css";
+import "../../styles/home.css";
 
 const personnel = [
   {
@@ -26,15 +26,17 @@ export default function PersonelList() {
   const navigate = useNavigate();
 
   return (
-    <div className="container d-flex flex-column align-items-center mt-4">
-      <Card className="card-container w-100 mb-3">
+    
+    <div className="container d-flex flex-column align-items-center w-100 mt-4">
+      <Card className="card-container d-flex card flex-column mb-3">
         <div className="header d-flex justify-content-between align-items-center">
           <h2 className="h5">Personeller</h2>
           <div className="status-badge">
-            <span className="badge">4/56 Personel Kredisi</span>
+            <span className="badge" style={{
+              color:"#6941C6"
+            }}>4/56 Personel Kredisi</span>
           </div>
         </div>
-
         <InputGroup className="mb-3">
           <Form.Control placeholder="Ara..." />
         </InputGroup>
@@ -85,7 +87,7 @@ export default function PersonelList() {
         </Button>
       </Card>
 
-      <div className="d-flex w-100 gap-2">
+      <div className="d-flex gap-2 w-50">
       <Button
   style={{
     backgroundColor: "#ffffff",
