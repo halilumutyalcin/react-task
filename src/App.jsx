@@ -6,7 +6,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import Staff from "./pages/staff";
 import NotFound from "./pages/not-found";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Global from './pages/global';
 import Company from './pages/company';
 import Teams from './pages/teams';
@@ -28,8 +28,9 @@ function App() {
         <Route path="/company" element={<Company />} />
         <Route path="/teams" element={<Teams />} />
 
-        <Route path="/staff" element={<Staff />} />
-
+        <Route path="/staff/*" element={<Staff />} />
+        <Route path="*" element={<Navigate to="/staff" />} />
+        
         <Route path="/projects" element={<Projects />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/edit" element={<Edit />} />

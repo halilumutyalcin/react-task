@@ -4,8 +4,13 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../styles/NewPersonnelForm.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import { FaPencil, FaTrash } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import '../styles/home.css';
 
-export default function NewPersonnelForm({ goToList }) {
+export default function NewPersonnelForm() {
+
+  const navigate = useNavigate();
+
   const [showSkillModal, setShowSkillModal] = useState(false);
   const [showAchModal, setshowAchModal] = useState(false);
 
@@ -16,6 +21,8 @@ export default function NewPersonnelForm({ goToList }) {
   const handleCloseAch = () => setshowAchModal(false);
 
   return (
+    <div className="container d-flex flex-column align-items-center mt-4">
+
     <div
       className="card d-flex flex-column position-relative"
       style={{ height: "750px", width: "736px" }}
@@ -25,7 +32,7 @@ export default function NewPersonnelForm({ goToList }) {
           type="button"
           className="btn-close position-absolute top-0 end-0 m-3"
           aria-label="Close"
-          onClick={goToList}
+          onClick={() => navigate("/staff/list")}
           style={{ color: "#D0D5DD" }}
         ></button>
 
@@ -429,7 +436,7 @@ export default function NewPersonnelForm({ goToList }) {
           id="prev"
           className="flex-fill"
           style={{ border: "1px solid #D0D5DD" }}
-          onClick={goToList}
+          onClick={() => navigate("/staff/list")}
         >
           Vazgeç
         </Button>
@@ -442,5 +449,7 @@ export default function NewPersonnelForm({ goToList }) {
         </Button>
       </div>
     </div>
+    </div>
+
   );
 }
