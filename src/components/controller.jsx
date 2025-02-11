@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Home from "../pages/home";
+import Staff from "../pages/staff";
 import PersonelList from "./personelList";
 import NewPersonelForm from "./newPersonelForm";
 import MainScreen from "./mainScreen";

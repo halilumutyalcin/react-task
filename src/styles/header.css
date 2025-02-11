@@ -19,9 +19,25 @@
     align-items: center;
     justify-content: center;
     background: white;
-    border-bottom: 2px solid #7F56D9;
+    border-bottom: 2px solid #E4E7EC;
     margin: 12px;
     transition: width 0.3s ease-in-out;
+  }
+  
+  .step-box.completed {
+    border-bottom: 4px solid #7F56D9; /* Pembe renk */
+  }
+  
+  /* Aktif step geniş olacak */
+  .step-box.active {
+    width: 244px;
+    height: 96px;
+  }
+  
+  /* İnaktif steplerin boyutu değişmeyecek */
+  .step-box.inactive {
+    width: 120px;
+    height: 96px;
   }
   
   /* Active and inactive step box widths */
