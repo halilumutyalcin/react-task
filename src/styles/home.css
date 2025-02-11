@@ -1,0 +1,133 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    
+  }
+  
+  .card-container {
+    width: 50%;
+    height: 50%;
+    padding: 24px;
+    box-shadow: 0px 4px 6px "#E4E7EC";
+    border-radius: 10px;
+    background-color: white;
+    z-index: 1;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .search-box {
+    margin-bottom: 1rem;
+  }
+  
+  .personnel-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .personnel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #E4E7EC;
+    margin-bottom: 0.5rem;
+  }
+  
+  .personnel-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .personnel-info img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .add-button,
+  .nav-buttons {
+    margin-top: 1rem;
+  }
+
+  .add-button{
+    background-color: white;
+    color: black;
+    border: 1px solid black; 
+  }
+  .add-button:hover {
+    background-color: #7F56D9;
+    color: white;
+  }
+  
+  #next {
+    background-color: #7F56D9;
+  }
+  #prev {
+    background-color: white;
+    color: black;
+    border: 1px solid black; 
+  }
+  
+  #prev:hover {
+    background-color: #7F56D9;
+    color: white;
+  }
+  
+  .badge {
+    color: #6941C6;
+    background-color: #F9F5FF;
+    border: 1px solid #E9D7FE;
+
+  }
+  .personnel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: white;
+  }
+  
+  .personnel-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .delete-btn {
+    color: red;
+  }
+  
+  .edit-btn {
+    color: #374151;
+  }
+  
+  

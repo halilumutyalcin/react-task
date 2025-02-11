@@ -1,0 +1,65 @@
+.footer-container {
+    background-color: #ffffff;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 310px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .phantom {
+    display: block;
+    padding: 20px;
+    height: 60px;
+    width: 100%;
+  }
+  
+  .footer-icons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 200px;
+    width: 56px;
+    height: 56px;
+    background-color: transparent;
+    border-radius: 12px;
+    border: 1px solid #d0d5dd;
+  }
+  
+  .exit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 200px;
+    width: 56px;
+    height: 56px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    background-color: #d92d20;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #d92d20;
+    color: white;
+  }
+  
+  .footer-image {
+    opacity: 0.4;
+  }
+  
+  .chimney-image {
+    width: 120px;
+    height: 90px;
+    margin-bottom: 60px;
+  }
+  
