@@ -35,7 +35,6 @@ export default function EmployeeList() {
   const filteredEmployees = employees.filter((employee) =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
 
   return (
     <div className="container d-flex flex-column align-items-center w-100 mt-4">
@@ -50,13 +49,12 @@ export default function EmployeeList() {
         </div>
 
         <InputGroup className="mb-3">
-  <Form.Control 
-    placeholder="Ara..." 
-    value={searchTerm}
-    onChange={handleSearch} 
-  />
-</InputGroup>
-
+          <Form.Control
+            placeholder="Ara..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </InputGroup>
 
         {loading ? (
           <p>Yükleniyor...</p>

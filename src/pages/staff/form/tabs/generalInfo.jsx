@@ -106,7 +106,7 @@ export default function GeneralInfo() {
             <input
               type="text"
               className="form-control"
-              value="1384843811"
+              value={values.id} // 🔥 ID'yi formdan al
               disabled
             />
           </div>

@@ -43,19 +43,19 @@ export const validationSchema = Yup.object({
 });
 
 export const initialValues = {
-  photo: "", // Profil fotoğrafı (URL veya dosya için)
-  id: "1384843811", // ID değişmeyecek, bu yüzden readonly
-  role: "", // Yetki
-  name: "", // Ad
-  surname: "", // Soyad
-  phone: "", // Telefon numarası
-  email: "", // E-posta
-  date: "", // İşe giriş tarihi
-  upuPoint: "", // Upu puanı
-  totalCost: "", // Toplam maliyet
-  salary: "", // Maaş
-  department: "", // Departman
-  isDepartmentManager: false, // Departman sorumlusu mu?
-  skills: [], // Yetenekler (Boş bir dizi olarak başlatıldı)
-  achievements: [], //
+  photo: "",
+  id: String(Math.floor(1000000000 + Math.random() * 9000000000)), // 🚀 10 haneli rastgele sayı
+  role: "",
+  name: "",
+  surname: "",
+  phone: "",
+  email: "",
+  date: "",
+  upuPoint: "",
+  totalCost: "",
+  salary: "",
+  department: "",
+  isDepartmentManager: false,
+  skills: [],
+  achievements: [],
 };
