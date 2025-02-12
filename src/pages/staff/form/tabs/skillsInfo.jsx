@@ -95,27 +95,30 @@ export default function SkillsInfo({ values, setFieldValue }) {
         <div className="mb-3">
           <label className="form-label">Operasyon</label>
           <select
-  className="form-select"
-  name="operation"
-  value={skill.operation}
-  onChange={handleChange}
-  required
->
-  <option value="">Seçiniz</option>
-  <option value="Frontend Development">Frontend Development</option>
-  <option value="Backend Development">Backend Development</option>
-  <option value="Full Stack Development">Full Stack Development</option>
-  <option value="Database Management">Database Management</option>
-  <option value="DevOps Engineering">DevOps Engineering</option>
-  <option value="Mobile App Development">Mobile App Development</option>
-  <option value="Cyber Security">Cyber Security</option>
-  <option value="Machine Learning">Machine Learning</option>
-  <option value="Cloud Computing">Cloud Computing</option>
-  <option value="Embedded Systems">Embedded Systems</option>
-  <option value="Game Development">Game Development</option>
-  <option value="Software Testing & QA">Software Testing & QA</option>
-</select>
-
+            className="form-select"
+            name="operation"
+            value={skill.operation}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Seçiniz</option>
+            <option value="Frontend Development">Frontend Development</option>
+            <option value="Backend Development">Backend Development</option>
+            <option value="Full Stack Development">
+              Full Stack Development
+            </option>
+            <option value="Database Management">Database Management</option>
+            <option value="DevOps Engineering">DevOps Engineering</option>
+            <option value="Mobile App Development">
+              Mobile App Development
+            </option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Cloud Computing">Cloud Computing</option>
+            <option value="Embedded Systems">Embedded Systems</option>
+            <option value="Game Development">Game Development</option>
+            <option value="Software Testing & QA">Software Testing & QA</option>
+          </select>
         </div>
         <div className="mb-3">
           <label className="form-label">Tarih</label>

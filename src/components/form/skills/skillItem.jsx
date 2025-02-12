@@ -1,5 +1,6 @@
 import React from "react";
-import { FaPencil, FaTrash } from "react-icons/fa6";
+import { FiEdit2 } from "react-icons/fi";
+import { LuTrash2 } from "react-icons/lu";
 
 export default function SkillItem({ skill, onEdit, onDelete, index }) {
   return (
@@ -8,21 +9,23 @@ export default function SkillItem({ skill, onEdit, onDelete, index }) {
         <strong>{skill.operation}</strong>
         <div className="text-muted">Başarı Düzeyi: {skill.level}/10</div>
       </div>
-      <div>
+      <div className="d-flex gap-3">
         <button
-          className="btn btn-sm btn-outline-secondary"
+          className="border-0 bg-transparent p-1"
           onClick={(event) => {
-            event.preventDefault(); // 🛑 Formun submit olmasını engelle
-            onEdit(index); // ✅ SkillItem'de olduğu gibi index parametresini geçir
+            event.preventDefault();
+            onEdit(index);
           }}
+          style={{ color: "#667085", fontSize: "18px" }}
         >
-          <FaPencil size={16} />
+          <FiEdit2 />
         </button>
         <button
-          className="btn btn-sm btn-outline-danger ms-2"
+          className="border-0 bg-transparent p-1"
           onClick={() => onDelete(skill.operation)}
+          style={{ color: "#D92D20", fontSize: "18px" }}
         >
-          <FaTrash size={16} />
+          <LuTrash2 />
         </button>
       </div>
     </li>

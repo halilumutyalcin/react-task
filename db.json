@@ -37,6 +37,39 @@
           "document": null
         }
       ]
+    },
+    {
+      "id": "4204504538",
+      "photo": "",
+      "role": "123123",
+      "name": "123",
+      "surname": "123",
+      "phone": "+905355637536",
+      "email": "12@gmail.com",
+      "date": "0123-03-12",
+      "upuPoint": "123",
+      "totalCost": "123",
+      "salary": "123",
+      "department": "123",
+      "isDepartmentManager": false,
+      "skills": [
+        {
+          "operation": "Game Development",
+          "date": "2025-02-21",
+          "level": "4"
+        }
+      ],
+      "achievements": [
+        {
+          "name": "Halil Umut Yalçın",
+          "date": "2025-02-06",
+          "institution": "1",
+          "certificateNo": "11",
+          "obtainedScore": "1",
+          "totalScore": "1",
+          "document": null
+        }
+      ]
     }
   ]
 }

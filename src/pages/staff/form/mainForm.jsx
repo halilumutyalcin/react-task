@@ -17,15 +17,13 @@ export default function AddStaff() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams(); // ✅ URL'den id al (Eğer edit sayfasındaysan)
+  const { id } = useParams();
   const submitFormRef = useRef(null);
 
-  // 🔥 Redux'taki çalışan listesinden id'ye göre çalışanı bul
   const editingEmployee = useSelector((state) =>
     state.employee.employees.find((emp) => emp.id === id)
   );
 
-  // ✅ Eğer edit modundaysak mevcut çalışanı yükle, yoksa boş bırak
   const [formValues, setFormValues] = useState(
     editingEmployee || initialValues
   );
@@ -47,7 +45,6 @@ export default function AddStaff() {
         const base64Photo = reader.result;
         const payload = { ...values, photo: base64Photo };
 
-        // 🔥 Eğer id varsa güncelle, yoksa yeni ekle
         if (id) {
           dispatch(updateEmployeeAsync({ id, ...payload }))
             .then(() => {
@@ -109,7 +106,7 @@ export default function AddStaff() {
           <Formik
             initialValues={formValues}
             validationSchema={validationSchema}
-            enableReinitialize={true} // 🔥 Redux'tan gelen veriyi günceller
+            enableReinitialize={true}
             onSubmit={handleSubmit}
           >
             {({ values, setFieldValue, submitForm }) => (

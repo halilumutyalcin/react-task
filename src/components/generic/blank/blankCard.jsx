@@ -1,5 +1,5 @@
 import React from "react";
-import BlankContainer from "./blankContainer"; // ✅ BlankContainer import edildi
+import BlankContainer from "./blankContainer"; 
 
 function BlankCard({ title }) {
   return (

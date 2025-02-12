@@ -5,7 +5,7 @@ function BlankContainer({ children }) {
     <div
       className="container d-flex justify-content-center align-items-center"
       style={{
-        minHeight: "678px", // Header ve footer arasında boşluk bırak
+        minHeight: "678px", 
         padding: "20px",
       }}
     >

@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 
 export default function AddStaff() {
   const navigate = useNavigate();
-  const activeTab = useSelector((state) => state.tab.activeTab); // ✅ Redux'tan al
+  const activeTab = useSelector((state) => state.tab.activeTab);
 
   const handleSubmit = (values) => {
     alert("Form Kaydedildi!");
@@ -38,8 +38,12 @@ export default function AddStaff() {
           >
             {({ values, setFieldValue }) => (
               <Form>
-                <TabNavigation /> {/* ✅ Redux ile çalışan sekme yönetimi */}
-                <FormContent activeTab={activeTab} values={values} setFieldValue={setFieldValue} />
+                <TabNavigation />
+                <FormContent
+                  activeTab={activeTab}
+                  values={values}
+                  setFieldValue={setFieldValue}
+                />
                 <FormActions navigate={navigate} />
               </Form>
             )}

@@ -7,9 +7,9 @@ export default function AchievementList({ achievements, onEdit, onDelete }) {
       {achievements.map((achievement, index) => (
         <AchievementItem
           key={index}
-          index={index} // ✅ index prop'unu geçir
+          index={index}
           achievement={achievement}
-          onEdit={onEdit} // ✅ index zaten AchievementItem içinde kullanılacak
+          onEdit={onEdit}
           onDelete={onDelete}
         />
       ))}

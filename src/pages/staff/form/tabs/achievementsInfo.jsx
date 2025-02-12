@@ -5,7 +5,7 @@ import AchievementList from "../../../../components/form/achivements/achivementL
 
 export default function AchievementsInfo({ values, setFieldValue }) {
   const [showModal, setShowModal] = useState(false);
-  const [editIndex, setEditIndex] = useState(null); // Düzenleme için indeks
+  const [editIndex, setEditIndex] = useState(null);
   const [achievement, setAchievement] = useState({
     name: "",
     date: "",
@@ -19,7 +19,7 @@ export default function AchievementsInfo({ values, setFieldValue }) {
   const achievements = values.achievements || [];
 
   const handleShow = () => {
-    setEditIndex(null); // Yeni başarı eklerken indeks sıfırla
+    setEditIndex(null);
     setAchievement({
       name: "",
       date: "",
@@ -50,31 +50,26 @@ export default function AchievementsInfo({ values, setFieldValue }) {
       reader.onloadend = () => {
         setAchievement((prev) => ({
           ...prev,
-          file: reader.result, // ✅ Base64 olarak kaydet
-          filePreview: reader.result, // ✅ Önizleme için de Base64 kullan
-          fileName: file.name, // ✅ Orijinal dosya adını da sakla
+          file: reader.result,
+          filePreview: reader.result,
+          fileName: file.name,
         }));
       };
 
-      reader.readAsDataURL(file); // ✅ Base64'e çevir
+      reader.readAsDataURL(file);
     }
   };
 
-  // **Başarıyı Kaydetme (Ekleme/Düzenleme)**
   const handleSaveAchievement = () => {
     if (achievement.name && achievement.date && achievement.institution) {
       let updatedAchievements = [...achievements];
 
       if (editIndex !== null) {
-        // **Düzenleme modunda: var olan kaydı güncelle**
         updatedAchievements[editIndex] = achievement;
       } else {
-        // **Yeni başarı ekleme modu**
         updatedAchievements = [...updatedAchievements, achievement];
       }
 
-
-      // ✅ Formik state'ini güncelle
       setFieldValue("achievements", updatedAchievements, true);
 
       handleClose();
@@ -83,22 +78,20 @@ export default function AchievementsInfo({ values, setFieldValue }) {
     }
   };
 
-  // **Başarıyı Düzenleme**
   const handleEditAchievement = (index) => {
     const selectedAchievement = achievements[index];
 
     setAchievement({
       ...selectedAchievement,
-      file: selectedAchievement.file || null, // ✅ Base64 dosya bilgisi korunsun
-      filePreview: selectedAchievement.filePreview || "", // ✅ Önizleme korunsun
-      fileName: selectedAchievement.fileName || "", // ✅ Dosya adı korunsun
+      file: selectedAchievement.file || null,
+      filePreview: selectedAchievement.filePreview || "",
+      fileName: selectedAchievement.fileName || "",
     });
 
     setEditIndex(index);
     setShowModal(true);
   };
 
-  // **Başarıyı Silme**
   const handleDeleteAchievement = (index) => {
     const updatedAchievements = achievements.filter((_, i) => i !== index);
     setFieldValue("achievements", updatedAchievements, true);
@@ -135,14 +128,12 @@ export default function AchievementsInfo({ values, setFieldValue }) {
         </Button>
       </div>
 
-      {/* Başarı Listesi */}
       <AchievementList
         achievements={achievements}
         onEdit={handleEditAchievement}
         onDelete={handleDeleteAchievement}
       />
 
-      {/* Modal - Yeni/Düzenleme */}
       <CustomModal
         show={showModal}
         handleClose={handleClose}
@@ -154,7 +145,13 @@ export default function AchievementsInfo({ values, setFieldValue }) {
         onSave={handleSaveAchievement}
       >
         <div className="row">
-          <div className="col-md-6">
+          <div
+            className="col-md-6"
+            style={{
+              borderRight: "2px solid #D0D5DD",
+              paddingRight: "15px",
+            }}
+          >
             <label className="form-label">Başarı</label>
             <input
               type="text"
@@ -164,19 +161,8 @@ export default function AchievementsInfo({ values, setFieldValue }) {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Sertifika No</label>
-            <input
-              type="text"
-              className="form-control"
-              name="certificateNo"
-              value={achievement.certificateNo}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Tarih</label>
+
+            <label className="form-label mt-3">Tarih</label>
             <input
               type="date"
               className="form-control"
@@ -185,19 +171,8 @@ export default function AchievementsInfo({ values, setFieldValue }) {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Alınan Puan</label>
-            <input
-              type="number"
-              className="form-control"
-              name="obtainedScore"
-              value={achievement.obtainedScore}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Kurum</label>
+
+            <label className="form-label mt-3">Kurum</label>
             <input
               type="text"
               className="form-control"
@@ -206,9 +181,49 @@ export default function AchievementsInfo({ values, setFieldValue }) {
               onChange={handleChange}
               required
             />
+            <div className="col-md-12 mt-3">
+              <label className="form-label">Ek Belge</label>
+              <input
+                type="file"
+                className="form-control"
+                onChange={handleFileChange}
+              />
+
+              {achievement.filePreview && (
+                <div className="mt-2">
+                  <strong>Yüklenen Belge:</strong>
+                  <a
+                    href={achievement.filePreview}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {achievement.fileName || "Dosyayı Görüntüle"}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Tam Puan</label>
+
+          <div className="col-md-6" style={{ paddingLeft: "15px" }}>
+            <label className="form-label">Sertifika No</label>
+            <input
+              type="text"
+              className="form-control"
+              name="certificateNo"
+              value={achievement.certificateNo}
+              onChange={handleChange}
+            />
+
+            <label className="form-label mt-3">Alınan Puan</label>
+            <input
+              type="number"
+              className="form-control"
+              name="obtainedScore"
+              value={achievement.obtainedScore}
+              onChange={handleChange}
+            />
+
+            <label className="form-label mt-3">Tam Puan</label>
             <input
               type="number"
               className="form-control"
@@ -216,27 +231,6 @@ export default function AchievementsInfo({ values, setFieldValue }) {
               value={achievement.totalScore}
               onChange={handleChange}
             />
-          </div>
-          <div className="col-md-12">
-            <label className="form-label">Ek Belge</label>
-            <input
-              type="file"
-              className="form-control"
-              onChange={handleFileChange}
-            />
-
-            {achievement.filePreview && (
-              <div className="mt-2">
-                <strong>Yüklenen Belge:</strong>
-                <a
-                  href={achievement.filePreview}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {achievement.fileName || "Dosyayı Görüntüle"}
-                </a>
-              </div>
-            )}
           </div>
         </div>
       </CustomModal>

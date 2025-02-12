@@ -16,12 +16,12 @@ export default function EmployeeList() {
   const { employees, loading } = useSelector((state) => state.employee);
 
   useEffect(() => {
-    dispatch(fetchEmployeesAsync()); // Redux'tan çalışanları çek
+    dispatch(fetchEmployeesAsync());
   }, [dispatch]);
 
   const handleEdit = (person) => {
-    dispatch(setEditingEmployee(person)); // 🔥 Seçili çalışanı Redux'a kaydet
-    navigate(`/staff/edit/${person.id}`); // 🔥 Form sayfasına yönlendir
+    dispatch(setEditingEmployee(person));
+    navigate(`/staff/edit/${person.id}`);
   };
 
   const handleDelete = (person) => {

@@ -3,12 +3,12 @@ import * as Yup from "yup";
 export const validationSchema = Yup.object({
   photo: Yup.mixed()
     .test("fileSize", "Dosya 2MB'dan küçük olmalıdır", (value) => {
-      if (!value || typeof value === "string") return true; // Base64 ise doğrula
-      return value.size <= 2 * 1024 * 1024; // Dosya boyutu kontrolü
+      if (!value || typeof value === "string") return true; 
+      return value.size <= 2 * 1024 * 1024; 
     })
     .test("fileType", "Sadece JPG ve PNG yükleyebilirsiniz", (value) => {
-      if (!value || typeof value === "string") return true; // Base64 ise doğrula
-      return ["image/jpeg", "image/png"].includes(value.type); // Dosya formatı kontrolü
+      if (!value || typeof value === "string") return true; 
+      return ["image/jpeg", "image/png"].includes(value.type); 
     })
     .nullable(),
 
@@ -44,7 +44,7 @@ export const validationSchema = Yup.object({
 
 export const initialValues = {
   photo: "",
-  id: String(Math.floor(1000000000 + Math.random() * 9000000000)), // 🚀 10 haneli rastgele sayı
+  id: "",
   role: "",
   name: "",
   surname: "",

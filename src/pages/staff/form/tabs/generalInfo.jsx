@@ -1,9 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { FaPencil, FaTrash } from "react-icons/fa6";
 import { useFormikContext } from "formik";
+const generateRandomID = () =>
+  String(Math.floor(1000000000 + Math.random() * 9000000000));
+
 export default function GeneralInfo() {
   const { values, handleChange, errors, touched, setFieldValue } =
     useFormikContext();
+  useEffect(() => {
+    if (!values.id) {
+      setFieldValue("id", generateRandomID());
+    }
+  }, [values.id, setFieldValue]);
 
   const fileInputRef = useRef(null);
   const [preview, setPreview] = useState(values.photo || null);
@@ -11,13 +19,11 @@ export default function GeneralInfo() {
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
     if (file) {
-      // Formik state'ine File nesnesini kaydet
       setFieldValue("photo", file);
 
-      // Base64 önizleme için dosyayı oku
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result); // Önizlemeyi güncelle
+        setPreview(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -26,7 +32,6 @@ export default function GeneralInfo() {
   return (
     <>
       <div className="row g-4 pb-2">
-        {/* Sol Sütun */}
         <div className="col-md-6 border-end">
           <div className="d-flex align-items-center mb-2">
             <div className="mb-4 d-flex align-items-center">
@@ -175,7 +180,6 @@ export default function GeneralInfo() {
           </div>
         </div>
 
-        {/* Sağ Sütun */}
         <div className="col-md-6">
           <div className="mb-4">
             <label>Email</label>
