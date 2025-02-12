@@ -23,14 +23,28 @@ export default function FormActions({ navigate, submitForm }) {
         Vazgeç
       </Button>
       <Button
-        id="next"
-        type="submit"
-        className="flex-fill"
-        style={{ border: "1px solid #D0D5DD" }}
-        onClick={submitForm} // Burada ref üzerinden aldığımız submit fonksiyonunu çağırıyoruz
-      >
-        Kaydet
-      </Button>
+  id="next"
+  type="submit"
+  className="flex-fill"
+  style={{ border: "1px solid #D0D5DD" }}
+  onClick={() => {
+    console.log("Kaydet butonuna basıldı"); // ✅ Buton çalışıyor
+    submitForm()
+      .then(() => {
+        console.log("submitForm çağrıldı ve tamamlandı ✅"); // 🟢 Bu gelmeli
+      })
+      .catch((err) => {
+        console.error("submitForm hata verdi ❌", err);
+      })
+      .finally(() => {
+        console.log("submitForm tamamlandı 🎯");
+      });
+  }}
+>
+  Kaydet
+</Button>
+
+
     </div>
   );
 }

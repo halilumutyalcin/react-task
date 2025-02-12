@@ -36,39 +36,33 @@ export default function AddStaff() {
           <h2 className="h5 mb-3">Yeni Personel Ekle</h2>
 
           <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ values, setFieldValue, submitForm }) => {
-              useEffect(() => {
-                submitFormRef.current = submitForm;
-              }, [submitForm]);
+  initialValues={initialValues}
+  validationSchema={validationSchema}
+  onSubmit={(values) => {
+    console.log("✅ Form başarıyla submit edildi!", values);
+    alert("Form başarıyla gönderildi!");
+    navigate("/projects");
+  }}
+>
+  {({ values, errors, touched, setFieldValue, submitForm }) => {
+    useEffect(() => {
+      submitFormRef.current = submitForm;
+    }, [submitForm]);
 
-              return (
-                <Form>
-                  <TabNavigation
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                  />
-                  <FormContent
-                    activeTab={activeTab}
-                    values={values}
-                    setFieldValue={setFieldValue}
-                  />
-                  <FormActions
-                    navigate={navigate}
-                    submitForm={() => {
-                      submitForm().then(() => {
-                        console.log("Form başarıyla gönderildi!");
-                        console.log("Gönderilen Veriler:", values); // ✅ Güncellenmiş veriler
-                      });
-                    }}
-                  />
-                </Form>
-              );
-            }}
-          </Formik>
+    console.log("Formik Errors:", JSON.stringify(errors, null, 2)); 
+    console.log(values);
+    return (
+      <Form>
+        <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+        <FormContent activeTab={activeTab} values={values} setFieldValue={setFieldValue} />
+        <FormActions navigate={navigate} submitForm={submitForm} />
+      </Form>
+    );
+  }}
+</Formik>
+
+
+
         </div>
       </div>
     </div>
