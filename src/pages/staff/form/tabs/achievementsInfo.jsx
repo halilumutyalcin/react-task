@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { FaPencil, FaTrash } from "react-icons/fa6";
 import CustomModal from "../../../../components/form/customModal";
+import AchievementList from "../../../../components/form/achivements/achivementList";
 
 export default function AchievementsInfo({ values, setFieldValue }) {
   const [showModal, setShowModal] = useState(false);
@@ -16,15 +16,10 @@ export default function AchievementsInfo({ values, setFieldValue }) {
     document: null,
   });
 
-  const achievements = values.achievements || []; 
+  const achievements = values.achievements || [];
 
   const handleShow = () => {
     setEditIndex(null); // Yeni başarı eklerken indeks sıfırla
-    setShowModal(true);
-  };
-  
-  const handleClose = () => {
-    setShowModal(false);
     setAchievement({
       name: "",
       date: "",
@@ -34,6 +29,11 @@ export default function AchievementsInfo({ values, setFieldValue }) {
       totalScore: "",
       document: null,
     });
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
     setEditIndex(null);
   };
 
@@ -42,8 +42,22 @@ export default function AchievementsInfo({ values, setFieldValue }) {
     setAchievement((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
-    setAchievement((prev) => ({ ...prev, document: e.target.files[0] }));
+  const handleFileChange = (event) => {
+    const file = event.currentTarget.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setAchievement((prev) => ({
+          ...prev,
+          file: reader.result, // ✅ Base64 olarak kaydet
+          filePreview: reader.result, // ✅ Önizleme için de Base64 kullan
+          fileName: file.name, // ✅ Orijinal dosya adını da sakla
+        }));
+      };
+
+      reader.readAsDataURL(file); // ✅ Base64'e çevir
+    }
   };
 
   // **Başarıyı Kaydetme (Ekleme/Düzenleme)**
@@ -56,19 +70,30 @@ export default function AchievementsInfo({ values, setFieldValue }) {
         updatedAchievements[editIndex] = achievement;
       } else {
         // **Yeni başarı ekleme modu**
-        updatedAchievements.push(achievement);
+        updatedAchievements = [...updatedAchievements, achievement];
       }
 
-      setFieldValue("achievements", updatedAchievements);
+
+      // ✅ Formik state'ini güncelle
+      setFieldValue("achievements", updatedAchievements, true);
+
       handleClose();
     } else {
-      console.warn("Lütfen tüm zorunlu alanları doldurun!");
+      console.warn("⚠️ Lütfen tüm zorunlu alanları doldurun!");
     }
   };
 
   // **Başarıyı Düzenleme**
   const handleEditAchievement = (index) => {
-    setAchievement(achievements[index]); // Mevcut veriyi modal içine yükle
+    const selectedAchievement = achievements[index];
+
+    setAchievement({
+      ...selectedAchievement,
+      file: selectedAchievement.file || null, // ✅ Base64 dosya bilgisi korunsun
+      filePreview: selectedAchievement.filePreview || "", // ✅ Önizleme korunsun
+      fileName: selectedAchievement.fileName || "", // ✅ Dosya adı korunsun
+    });
+
     setEditIndex(index);
     setShowModal(true);
   };
@@ -76,7 +101,7 @@ export default function AchievementsInfo({ values, setFieldValue }) {
   // **Başarıyı Silme**
   const handleDeleteAchievement = (index) => {
     const updatedAchievements = achievements.filter((_, i) => i !== index);
-    setFieldValue("achievements", updatedAchievements);
+    setFieldValue("achievements", updatedAchievements, true);
   };
 
   return (
@@ -84,68 +109,134 @@ export default function AchievementsInfo({ values, setFieldValue }) {
       <div className="d-flex justify-content-between align-items-center">
         <h5>
           Kazanılmış Eğitim - Başarı{" "}
-          <span className="badge bg-light text-dark">{achievements.length} adet</span>
+          <span
+            className="badge"
+            stye={{
+              backgroundColor: "white",
+              color: "#6941C6",
+              border: "1px solid #E9D7FE",
+              fontWeight: "bold",
+            }}
+          >
+            {achievements.length} adet
+          </span>
         </h5>
         <Button
           variant="primary"
           onClick={handleShow}
-          style={{ backgroundColor: "white", color: "#7F56D9", border: "none", fontWeight: "bold" }}
+          style={{
+            backgroundColor: "white",
+            color: "#7F56D9",
+            border: "none",
+            fontWeight: "bold",
+          }}
         >
           + Başarı Ekle
         </Button>
       </div>
 
-      <ul className="list-group mt-2">
-        {achievements.map((ach, index) => (
-          <li key={index} className="d-flex justify-content-between align-items-center py-2">
-            <div>
-              <strong>{ach.name}</strong> 
-              <div className="text-muted">
-                Sertifika No: {ach.certificateNo} | Puan: {ach.obtainedScore}/{ach.totalScore}
-              </div>
-            </div>
-            <div>
-              <button className="btn btn-sm btn-outline-secondary" onClick={() => handleEditAchievement(index)}>
-                <FaPencil size={16} />
-              </button>
-              <button className="btn btn-sm btn-outline-danger ms-2" onClick={() => handleDeleteAchievement(index)}>
-                <FaTrash size={16} />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {/* Başarı Listesi */}
+      <AchievementList
+        achievements={achievements}
+        onEdit={handleEditAchievement}
+        onDelete={handleDeleteAchievement}
+      />
 
       {/* Modal - Yeni/Düzenleme */}
-      <CustomModal show={showModal} handleClose={handleClose} title={editIndex !== null ? "Başarıyı Düzenle" : "Yeni Kazanılmış Başarı Ekle"} onSave={handleSaveAchievement}>
+      <CustomModal
+        show={showModal}
+        handleClose={handleClose}
+        title={
+          editIndex !== null
+            ? "Başarıyı Düzenle"
+            : "Yeni Kazanılmış Başarı Ekle"
+        }
+        onSave={handleSaveAchievement}
+      >
         <div className="row">
           <div className="col-md-6">
             <label className="form-label">Başarı</label>
-            <input type="text" className="form-control" name="name" value={achievement.name} onChange={handleChange} required />
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              value={achievement.name}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="col-md-6">
             <label className="form-label">Sertifika No</label>
-            <input type="text" className="form-control" name="certificateNo" value={achievement.certificateNo} onChange={handleChange} />
+            <input
+              type="text"
+              className="form-control"
+              name="certificateNo"
+              value={achievement.certificateNo}
+              onChange={handleChange}
+            />
           </div>
           <div className="col-md-6">
             <label className="form-label">Tarih</label>
-            <input type="date" className="form-control" name="date" value={achievement.date} onChange={handleChange} required />
+            <input
+              type="date"
+              className="form-control"
+              name="date"
+              value={achievement.date}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="col-md-6">
             <label className="form-label">Alınan Puan</label>
-            <input type="number" className="form-control" name="obtainedScore" value={achievement.obtainedScore} onChange={handleChange} />
+            <input
+              type="number"
+              className="form-control"
+              name="obtainedScore"
+              value={achievement.obtainedScore}
+              onChange={handleChange}
+            />
           </div>
           <div className="col-md-6">
             <label className="form-label">Kurum</label>
-            <input type="text" className="form-control" name="institution" value={achievement.institution} onChange={handleChange} required />
+            <input
+              type="text"
+              className="form-control"
+              name="institution"
+              value={achievement.institution}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="col-md-6">
             <label className="form-label">Tam Puan</label>
-            <input type="number" className="form-control" name="totalScore" value={achievement.totalScore} onChange={handleChange} />
+            <input
+              type="number"
+              className="form-control"
+              name="totalScore"
+              value={achievement.totalScore}
+              onChange={handleChange}
+            />
           </div>
           <div className="col-md-12">
             <label className="form-label">Ek Belge</label>
-            <input type="file" className="form-control" onChange={handleFileChange} />
+            <input
+              type="file"
+              className="form-control"
+              onChange={handleFileChange}
+            />
+
+            {achievement.filePreview && (
+              <div className="mt-2">
+                <strong>Yüklenen Belge:</strong>
+                <a
+                  href={achievement.filePreview}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {achievement.fileName || "Dosyayı Görüntüle"}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </CustomModal>

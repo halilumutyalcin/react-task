@@ -15,19 +15,64 @@ function Header() {
   const [activeStep, setActiveStep] = useState(4);
 
   const steps = [
-    { id: 1, icons: { filled: FaGlobe, outlined: CiGlobe }, label: "Global", path: "/global" },
-    { id: 2, icons: { filled: FaBuilding, outlined: FaRegBuilding }, label: "Company", path: "/company" },
-    { id: 3, icons: { filled: HiUsers, outlined: HiOutlineUsers }, label: "Teams", path: "/teams" },
-    { id: 4, icons: { filled: FaUserFriends, outlined: FaUserFriends }, label: "Personnels", path: "/staff" },
-    { id: 5, icons: { filled: LiaProjectDiagramSolid, outlined: LiaProjectDiagramSolid }, label: "Projects", path: "/projects" },
-    { id: 6, icons: { filled: LiaCogsSolid, outlined: LiaCogsSolid }, label: "Settings", path: "/settings" },
-    { id: 7, icons: { filled: MdEdit, outlined: MdOutlineEdit }, label: "Edit", path: "/edit" },
-    { id: 8, icons: { filled: LuCalendarDays, outlined: LuCalendarDays }, label: "Schedule", path: "/schedule" },
+    {
+      id: 1,
+      icons: { filled: FaGlobe, outlined: CiGlobe },
+      label: "Global",
+      path: "/global",
+    },
+    {
+      id: 2,
+      icons: { filled: FaBuilding, outlined: FaRegBuilding },
+      label: "Company",
+      path: "/company",
+    },
+    {
+      id: 3,
+      icons: { filled: HiUsers, outlined: HiOutlineUsers },
+      label: "Teams",
+      path: "/teams",
+    },
+    {
+      id: 4,
+      icons: { filled: FaUserFriends, outlined: FaUserFriends },
+      label: "Personnels",
+      path: "/staff",
+    },
+    {
+      id: 5,
+      icons: {
+        filled: LiaProjectDiagramSolid,
+        outlined: LiaProjectDiagramSolid,
+      },
+      label: "Projects",
+      path: "/projects",
+    },
+    {
+      id: 6,
+      icons: { filled: LiaCogsSolid, outlined: LiaCogsSolid },
+      label: "Settings",
+      path: "/settings",
+    },
+    {
+      id: 7,
+      icons: { filled: MdEdit, outlined: MdOutlineEdit },
+      label: "Edit",
+      path: "/edit",
+    },
+    {
+      id: 8,
+      icons: { filled: LuCalendarDays, outlined: LuCalendarDays },
+      label: "Schedule",
+      path: "/schedule",
+    },
   ];
 
   // 🌟 Sayfa değiştiğinde activeStep'i güncelle
   useEffect(() => {
-    const currentStep = steps.find((step) => location.pathname.startsWith(step.path));
+    const currentStep = steps.find((step) =>
+      location.pathname.startsWith(step.path)
+    );
     if (currentStep) {
       setActiveStep(currentStep.id);
     }
@@ -44,13 +89,24 @@ function Header() {
               className="step-link"
             >
               <div
-                className={`step-box ${activeStep === step.id ? "active" : "inactive"} ${step.id <= activeStep ? "completed" : ""}`}
+                className={`step-box ${
+                  activeStep === step.id ? "active" : "inactive"
+                } ${step.id <= activeStep ? "completed" : ""}`}
               >
-                <div className={`step-icon-container ${activeStep === step.id ? "active" : "inactive"}`}>
-                  {React.createElement(activeStep === step.id ? step.icons.filled : step.icons.outlined, {
-                    size: 24,
-                    color: activeStep === step.id ? "white" : "#7F56D9",
-                  })}
+                <div
+                  className={`step-icon-container ${
+                    activeStep === step.id ? "active" : "inactive"
+                  }`}
+                >
+                  {React.createElement(
+                    activeStep === step.id
+                      ? step.icons.filled
+                      : step.icons.outlined,
+                    {
+                      size: 24,
+                      color: activeStep === step.id ? "white" : "#7F56D9",
+                    }
+                  )}
                 </div>
                 {activeStep === step.id && (
                   <div className="step-details">
@@ -62,7 +118,14 @@ function Header() {
             </Link>
 
             {index < steps.length - 1 && (
-              <hr className="step-divider" style={{ display: "block", visibility: "visible", backgroundColor: "#E4E7EC" }} />
+              <hr
+                className="step-divider"
+                style={{
+                  display: "block",
+                  visibility: "visible",
+                  backgroundColor: "#E4E7EC",
+                }}
+              />
             )}
           </React.Fragment>
         ))}

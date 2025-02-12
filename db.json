@@ -1,0 +1,42 @@
+{
+  "employees": [
+    {
+      "id": "1384843811",
+      "photo": "",
+      "role": "Mühendis",
+      "name": "Halil Umut",
+      "surname": "Yalçın",
+      "phone": "+905355637536",
+      "email": "yalcinhalilumut@gmail.com",
+      "date": "2025-02-07",
+      "upuPoint": "100",
+      "totalCost": "35000",
+      "salary": "50000",
+      "department": "Yazılım Geliştirme",
+      "isDepartmentManager": false,
+      "skills": [
+        {
+          "operation": "Frontend Development",
+          "date": "2025-02-01",
+          "level": "7"
+        },
+        {
+          "operation": "Machine Learning",
+          "date": "2025-02-01",
+          "level": "10"
+        }
+      ],
+      "achievements": [
+        {
+          "name": "React",
+          "date": "2025-02-01",
+          "institution": "upu.io",
+          "certificateNo": "111111",
+          "obtainedScore": "100",
+          "totalScore": "100",
+          "document": null
+        }
+      ]
+    }
+  ]
+}

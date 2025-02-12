@@ -1,7 +1,13 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import '../../styles/modal.css';
-export default function CustomModal({ show, handleClose, title, children, onSave }) {
+import "../../styles/modal.css";
+export default function CustomModal({
+  show,
+  handleClose,
+  title,
+  children,
+  onSave,
+}) {
   return (
     <Modal show={show} onHide={handleClose} className="custom-modal">
       <Modal.Header closeButton>

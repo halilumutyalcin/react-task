@@ -1,18 +1,16 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TabNavigation from "./tabNavigation";
 import FormContent from "./formContent";
 import FormActions from "./formActions";
-import { initialValues, validationSchema } from "../../schemas/generalInfo";
+import { initialValues, validationSchema } from "../../schemas/schema";
 import { Formik, Form } from "formik";
 
 export default function AddStaff() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("general");
+  const activeTab = useSelector((state) => state.tab.activeTab); // ✅ Redux'tan al
 
   const handleSubmit = (values) => {
-    console.log("Form Data:", values);
     alert("Form Kaydedildi!");
   };
 
@@ -33,7 +31,6 @@ export default function AddStaff() {
 
           <h2 className="h5 mb-3">Yeni Personel Ekle</h2>
 
-          {/* ✅ Formik burada */}
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -41,21 +38,9 @@ export default function AddStaff() {
           >
             {({ values, setFieldValue }) => (
               <Form>
-                {/* ✅ Formik'in içinde olduğundan emin olun */}
-                <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-
-                <FormContent
-                  activeTab={activeTab}
-                  values={values}
-                  setFieldValue={setFieldValue}
-                />
-
-                {/* ✅ Artık FormActions, Formik'in içinde */}
-                <FormActions
-                  navigate={navigate}
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                />
+                <TabNavigation /> {/* ✅ Redux ile çalışan sekme yönetimi */}
+                <FormContent activeTab={activeTab} values={values} setFieldValue={setFieldValue} />
+                <FormActions navigate={navigate} />
               </Form>
             )}
           </Formik>

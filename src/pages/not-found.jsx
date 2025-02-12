@@ -1,11 +1,6 @@
 import React from "react";
-
+import BlankCard from "../components/generic/blank/blankCard";
 function NotFound() {
-    return(
-        <div>
-            404
-        </div>
-    )
-    
+  <BlankCard title="Not Found - 404"/>
 }
 export default NotFound;

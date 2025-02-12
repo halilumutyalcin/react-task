@@ -1,7 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-
+import { useFormikContext } from "formik";
 export default function FormActions({ navigate, submitForm }) {
+  const { isSubmitting } = useFormikContext();
   return (
     <div
       className="form-actions"
@@ -9,7 +10,7 @@ export default function FormActions({ navigate, submitForm }) {
         position: "absolute",
         bottom: "0",
         left: "0",
-  right: "0",
+        right: "0",
         background: "white",
         width: "100%",
       }}
@@ -23,28 +24,14 @@ export default function FormActions({ navigate, submitForm }) {
         Vazgeç
       </Button>
       <Button
-  id="next"
-  type="submit"
-  className="flex-fill"
-  style={{ border: "1px solid #D0D5DD" }}
-  onClick={() => {
-    console.log("Kaydet butonuna basıldı"); // ✅ Buton çalışıyor
-    submitForm()
-      .then(() => {
-        console.log("submitForm çağrıldı ve tamamlandı ✅"); // 🟢 Bu gelmeli
-      })
-      .catch((err) => {
-        console.error("submitForm hata verdi ❌", err);
-      })
-      .finally(() => {
-        console.log("submitForm tamamlandı 🎯");
-      });
-  }}
->
-  Kaydet
-</Button>
-
-
+        id="next"
+        type="submit"
+        className="flex-fill"
+        style={{ border: "1px solid #D0D5DD" }}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
+      </Button>
     </div>
   );
 }

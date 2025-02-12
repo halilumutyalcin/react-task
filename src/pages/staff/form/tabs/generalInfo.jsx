@@ -4,96 +4,104 @@ import { useFormikContext } from "formik";
 export default function GeneralInfo() {
   const { values, handleChange, errors, touched, setFieldValue } =
     useFormikContext();
+
   const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState(values.photo || null);
 
-  const [preview, setPreview] = useState(null); // Önizleme için state
-
-  // Dosya yükleme işlemi
   const handleFileChange = (event) => {
     const file = event.currentTarget.files[0];
     if (file) {
-      setFieldValue("photo", file); // ✅ Formik state'ine dosyayı kaydet
+      // Formik state'ine File nesnesini kaydet
+      setFieldValue("photo", file);
 
-      // Seçilen resmin URL'sini oluştur
-      const objectUrl = URL.createObjectURL(file);
-      setPreview(objectUrl);
+      // Base64 önizleme için dosyayı oku
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result); // Önizlemeyi güncelle
+      };
+      reader.readAsDataURL(file);
     }
   };
+
   return (
     <>
       <div className="row g-4 pb-2">
         {/* Sol Sütun */}
         <div className="col-md-6 border-end">
           <div className="d-flex align-items-center mb-2">
-          <div className="mb-4 d-flex align-items-center">
-      {/* Yüklenmiş resim varsa göster, yoksa eski butonu göster */}
-      {preview ? (
-        <div
-          className="rounded-circle d-flex align-items-center justify-content-center"
-          style={{
-            width: "48px",
-            height: "48px",
-            border: "3px dotted #D0D5DD",
-            overflow: "hidden",
-            backgroundColor: "white",
-          }}
-          onClick={() => fileInputRef.current.click()} // Tıklanınca dosya seçtir
-        >
-          <img
-            src={preview}
-            alt="Profil Önizleme"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        </div>
-      ) : (
-        <button
-          className="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
-          style={{
-            width: "48px",
-            height: "48px",
-            fontSize: "24px",
-            marginRight: "12px",
-            border: "3px dotted #D0D5DD",
-            color: "#667085",
-            backgroundColor: "white",
-          }}
-          onClick={() => fileInputRef.current.click()} // Butona tıklanınca dosya seçtir
-        >
-          +
-        </button>
-      )}
+            <div className="mb-4 d-flex align-items-center">
+              {/* Yüklenmiş resim varsa göster, yoksa eski butonu göster */}
+              {preview ? (
+                <div
+                  className="rounded-circle d-flex align-items-center justify-content-center"
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    border: "3px dotted #D0D5DD",
+                    overflow: "hidden",
+                    backgroundColor: "white",
+                  }}
+                  onClick={() => fileInputRef.current.click()} // Tıklanınca dosya seçtir
+                >
+                  <img
+                    src={preview}
+                    alt="Profil Önizleme"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ) : (
+                <button
+                  className="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    fontSize: "24px",
+                    marginRight: "12px",
+                    border: "3px dotted #D0D5DD",
+                    color: "#667085",
+                    backgroundColor: "white",
+                  }}
+                  onClick={() => fileInputRef.current.click()} // Butona tıklanınca dosya seçtir
+                >
+                  +
+                </button>
+              )}
 
-      <div style={{paddingLeft: 10}}>
-        <label className="form-label fw-bold">Personel Fotoğrafı</label>
+              <div style={{ paddingLeft: 10 }}>
+                <label className="form-label fw-bold">Personel Fotoğrafı</label>
 
-        {/* Görünmez Dosya Yükleme Input'u */}
-        <input
-          type="file"
-          name="photo"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          accept="image/png, image/jpeg"
-          style={{ display: "none" }} // Gözükmesini istemiyoruz
-        />
+                {/* Görünmez Dosya Yükleme Input'u */}
+                <input
+                  type="file"
+                  name="photo"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/png, image/jpeg"
+                  style={{ display: "none" }} // Gözükmesini istemiyoruz
+                />
 
-        {/* Buton gibi çalışan 'Resim yükle' alanı */}
-        <div
-          className="text-primary"
-          style={{ cursor: "pointer", fontSize: "14px" }}
-          onClick={() => fileInputRef.current.click()} // Tıklanınca dosya input'unu aç
-        >
-          Resim yükle
-        </div>
+                {/* Buton gibi çalışan 'Resim yükle' alanı */}
+                <div
+                  className="text-primary"
+                  style={{ cursor: "pointer", fontSize: "14px" }}
+                  onClick={() => fileInputRef.current.click()} // Tıklanınca dosya input'unu aç
+                >
+                  Resim yükle
+                </div>
 
-        {/* Hata mesajı */}
-        {errors.photo && touched.photo && (
-          <div className="text-danger mt-1">{errors.photo}</div>
-        )}
-      </div>
-    </div>
+                {/* Hata mesajı */}
+                {errors.photo && touched.photo && (
+                  <div className="text-danger mt-1">{errors.photo}</div>
+                )}
+              </div>
+            </div>
           </div>
 
-          <div className="mb-4" >
+          <div className="mb-4">
             <label>ID</label>
             <input
               type="text"
