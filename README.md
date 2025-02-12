@@ -80,10 +80,3 @@ Redux Toolkit kullanılarak oluşturulan global state yönetimi.
    - Bu komut, **JSON Server**'ı `http://localhost:5000` adresinde ve **Vite geliştirme sunucusunu** başlatır.
 
 
-## Yapılacaklar
-- [ ] Form bileşenlerini daha modüler hale getirme.
-- [ ] Personel detay sayfası ekleme.
-- [ ] Yetkilendirme sistemi entegrasyonu.
-
-Bu proje ile ilgili geri bildirimlerinizi paylaşabilirsiniz. 😊
-
