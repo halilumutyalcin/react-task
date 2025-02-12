@@ -10,7 +10,6 @@ import {
   saveEmployeesToStorage,
 } from "../utils/localStorageHelper";
 
-// **LocalStorage'tan çalışanları oku ve başlangıç durumuna ekle**
 const initialState = {
   employees: getEmployeesFromStorage(),
   loading: false,
@@ -18,7 +17,6 @@ const initialState = {
   editingEmployee: null,
 };
 
-// **Çalışanları API'den çek ve LocalStorage'a kaydet**
 export const fetchEmployeesAsync = createAsyncThunk(
   "employee/fetchEmployees",
   async () => {
@@ -28,7 +26,6 @@ export const fetchEmployeesAsync = createAsyncThunk(
   }
 );
 
-// **Yeni çalışan ekle ve LocalStorage'ı güncelle**
 export const addEmployeeAsync = createAsyncThunk(
   "employee/addEmployee",
   async (employee) => {
@@ -39,7 +36,6 @@ export const addEmployeeAsync = createAsyncThunk(
   }
 );
 
-// **Çalışanı güncelle ve LocalStorage'ı güncelle**
 export const updateEmployeeAsync = createAsyncThunk(
   "employee/updateEmployee",
   async (employee) => {
@@ -52,7 +48,6 @@ export const updateEmployeeAsync = createAsyncThunk(
   }
 );
 
-// **Çalışanı sil ve LocalStorage'ı güncelle**
 export const deleteEmployeeAsync = createAsyncThunk(
   "employee/deleteEmployee",
   async (id) => {

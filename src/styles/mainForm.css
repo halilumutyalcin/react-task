@@ -10,6 +10,7 @@
   color: #7f56d9; /* Seçili sekmenin metin rengini siyah yap */
   font-weight: 600;
 }
+
 h5 {
   font-size: 20;
 }
@@ -18,8 +19,8 @@ h5 {
   z-index: 1;
 }
 .card {
-  min-height: auto; /* İçeriğe göre büyümesini sağlar */
-  transition: all 0.3s ease-in-out; /* Yumuşak genişleme efekti */
+  min-height: auto; 
+  transition: all 0.3s ease-in-out; 
 }
 .modal-body {
   overflow: visible !important;
@@ -29,7 +30,7 @@ h5 {
   visibility: visible !important;
   opacity: 1 !important;
   color: #6c757d !important;
-  z-index: 10; /* Başka öğelerin altında kalmasını önler */
+  z-index: 10; 
   min-height: 50px;
 }
 .text-muted {
@@ -39,7 +40,7 @@ h5 {
 
 .text-danger {
   display: block;
-  min-height: 20px; /* En az 20px yükseklik bırak */
+  min-height: 20px; 
   font-size: 14px;
 }
 

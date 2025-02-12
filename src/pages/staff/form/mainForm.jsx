@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom"; // ✅ useParams ile id al
+import { useNavigate, useParams } from "react-router-dom"; 
 import TabNavigation from "../../../components/form/tabNavigation";
 import FormContent from "../../../components/form/formContent";
 import FormActions from "../../../components/form/formActions ";
@@ -111,15 +111,8 @@ export default function AddStaff() {
           >
             {({ values, setFieldValue, submitForm }) => (
               <Form>
-                <TabNavigation
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                />
-                <FormContent
-                  activeTab={activeTab}
-                  values={values}
-                  setFieldValue={setFieldValue}
-                />
+                <TabNavigation /> 
+                <FormContent values={values} setFieldValue={setFieldValue} />
                 <FormActions navigate={navigate} submitForm={submitForm} />
               </Form>
             )}

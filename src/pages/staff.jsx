@@ -13,7 +13,6 @@ export default function Staff() {
         <Route path="list" element={<EmployeeList />} />
         <Route path="form" element={<NewPersonelForm />} />
 
-        {/* 🔥 Edit route'u eklendi */}
         <Route path="edit/:id" element={<NewPersonelForm />} />
       </Routes>
     </div>

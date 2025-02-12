@@ -11,7 +11,7 @@ import { LuCalendarDays } from "react-icons/lu";
 import { FaGlobe } from "react-icons/fa";
 
 function Header() {
-  const location = useLocation(); // 🚀 Sayfa değiştiğinde URL'yi yakala
+  const location = useLocation();
   const [activeStep, setActiveStep] = useState(4);
 
   const steps = [
@@ -68,7 +68,6 @@ function Header() {
     },
   ];
 
-  // 🌟 Sayfa değiştiğinde activeStep'i güncelle
   useEffect(() => {
     const currentStep = steps.find((step) =>
       location.pathname.startsWith(step.path)
@@ -76,7 +75,7 @@ function Header() {
     if (currentStep) {
       setActiveStep(currentStep.id);
     }
-  }, [location.pathname]); // 🔄 URL değiştiğinde çalıştır
+  }, [location.pathname]); 
 
   return (
     <div className="header-container">

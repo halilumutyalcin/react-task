@@ -53,7 +53,7 @@
 }
 
 .custom-modal .modal-footer .btn {
-  flex: 1; /* Butonları eşit genişlikte yap */
+  flex: 1; 
   text-align: center;
   padding: 12px;
   font-weight: bold;

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeTab: "general", // Varsayılan sekme
-  tabs: ["general", "skills", "achievements"], // ✅ Sekme listesi
-  tabLabels: {  // ✅ Sekme başlıklarını burada tut
+  activeTab: "general",  
+  tabs: ["general", "skills", "achievements"], 
+  tabLabels: {  
     general: "Genel",
     skills: "Yetenekler",
     achievements: "Kazanımlar",

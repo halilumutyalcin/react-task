@@ -65,7 +65,7 @@ export default function EmployeeList() {
             onDelete={handleDelete}
           />
         )}
-
+{employees.length < 56 && (
         <Button
           className="w-100 my-3"
           style={{
@@ -88,6 +88,7 @@ export default function EmployeeList() {
         >
           + Yeni Personel Ekle
         </Button>
+)}
       </Card>
 
       <div className="d-flex gap-2 w-50">
